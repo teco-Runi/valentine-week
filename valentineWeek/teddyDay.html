@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teddy Day 🧸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #e6d6ff, #ffd6e7, #ffe6cc);
+}
+
+/* ================= BIG QUADRANT IMAGES ================= */
+.quadrant {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Positions */
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/* Bottom left small */
+.bottom-left-small {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 180px;
+    z-index: 1;
+    animation: floatSmall 4s ease-in-out infinite;
+}
+
+/* ================= TEDDY CONTAINER ================= */
+.teddy-container {
+    position: relative;
+    width: 400px;
+    z-index: 3;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Teddy */
+.teddy-shape {
+    width: 100%;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+/* ================= CONTENT ================= */
+.content {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    text-align: center;
+    color: #7a3e9d;
+}
+
+.content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 14px;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+    margin-top: 15px;
+}
+
+.buttons button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #9b5de5, #f15bb5);
+    color: white;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    transform: scale(1.1);
+}
+
+/* ================= FLOATING MINI ITEMS ================= */
+#floating span {
+    position: fixed;
+    top: -20px;
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* ================= FLOAT ANIMATIONS ================= */
+@keyframes float {
+    0%,100% { transform: translateY(-50%) translateY(0); }
+    50% { transform: translateY(-50%) translateY(-15px); }
+}
+
+@keyframes floatSmall {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== BIG SCREEN DIVIDE IMAGES ===== -->
+<img src="image/teddy3.svg" class="quadrant top-left" alt="">
+<img src="image/teddy3.svg" class="quadrant top-right" alt="">
+<img src="image/teddy3.svg" class="quadrant bottom-right" alt="">
+
+<!-- ===== SMALL BOTTOM LEFT IMAGE ===== -->
+<img src="image/teddy2.svg" class="bottom-left-small" alt="">
+
+<!-- ===== TEDDY SECTION ===== -->
+<div class="teddy-container">
+    <div class="content">
+        <h1>Happy Teddy Day, Bubu 🧸💜</h1>
+        <p>
+            If I cannot hug you today,<br>
+            let this teddy carry my warmth,<br>
+            my love, and my endless cuddles 🤍
+        </p>
+        <img src="image/teddy.svg" class="teddy-shape" alt="Big Teddy">
+
+        <div class="buttons">
+            <button id="nextDayBtn">Promise Day 💍</button>
+            <button id="playMusicBtn">🎵 Play</button>
+            <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+        </div>
+    </div>
+
+</div>
+
+<div id="floating"></div>
+
+<script>
+
+/* Floating emojis */
+const floating = document.getElementById('floating');
+const items = ['🧸','💜','✨','💕'];
+
+function createItem() {
+    const span = document.createElement('span');
+    span.innerText = items[Math.floor(Math.random() * items.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.fontSize = (15 + Math.random() * 15) + 'px';
+    span.style.animationDuration = (4 + Math.random() * 4) + 's';
+    floating.appendChild(span);
+    setTimeout(() => span.remove(), 8000);
+}
+setInterval(createItem, 400);
+
+/* Music */
+const music = document.getElementById('bgMusic');
+document.getElementById('playMusicBtn').addEventListener('click', () => {
+    music.play();
+});
+
+/* Next page */
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+    window.location.href = 'promiseDay.html';
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Week – Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<!-- Main Container -->
+<div class="container">
+
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1>Hey Bubu 💖</h1>
+    <h2>💖 Welcome to Valentine Week! 💖</h2>
+    <p>Celebrate love and affection every day!</p>
+    <p class="message">Even though we’re miles apart, every day with you feels special. Just thinking of you makes my heart smile. ❤️</p>
+  </section>
+
+  <!-- Button Section -->
+<!-- Button Section -->
+<section class="button-section">
+  <button id="exploreBtn">Explore the Week →</button>
+  <br><br>
+  <!-- Play Music Button -->
+  <button id="playMusicBtn">🎵 Play Music</button>
+  <!-- Hidden audio element -->
+  <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+</section>
+
+
+</div>
+
+<!-- Couple Image in Bottom-Left -->
+<img src="/image/index1.svg" alt="Couple Left" class="couple left">
+
+<!-- Teddy Image in Bottom-Right -->
+<img src="/image/index2.svg" alt="Teddy Right" class="couple right">
+
+<!-- Floating Hearts, Roses, Kiss Marks -->
+<div id="floating-elements"></div>
+
+<script>
+/// Get audio element
+const music = document.getElementById('bgMusic');
+
+// Play button for music
+const playBtn = document.getElementById('playMusicBtn');
+playBtn.addEventListener('click', () => {
+    music.play().catch(() => console.log("Autoplay blocked"));
+    playBtn.style.display = 'none'; // hide button after play
+});
+
+// Explore button click
+document.getElementById('exploreBtn').addEventListener('click', () => {
+  window.location.href = 'roseDay.html';
+});
+
+// Floating elements
+const container = document.getElementById('floating-elements');
+const icons = ['💖', '🌹', '💋'];
+
+function createFloatingElement() {
+  const span = document.createElement('span');
+  span.innerText = icons[Math.floor(Math.random() * icons.length)];
+  span.style.left = Math.random() * window.innerWidth + 'px';
+  span.style.fontSize = (8 + Math.random() * 12) + 'px'; // small size
+  span.style.animationDuration = (5 + Math.random() * 5) + 's';
+  span.style.zIndex = '5';
+  span.style.pointerEvents = 'none';
+  container.appendChild(span);
+  setTimeout(() => container.removeChild(span), 10000);
+}
+
+setInterval(createFloatingElement, 300); // gently spawn floating elements
+
+</script>
+
+</body>
+</html>

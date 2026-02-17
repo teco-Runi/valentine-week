@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Day 🍫</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="chocolate-bg">
+
+<div class="spotlight left-light"></div>
+<div class="spotlight right-light"></div>
+
+<div class="side-text left-text">Love Me 💖</div>
+<div class="side-text right-text">You & Me ✨</div>
+
+<div class="container">
+
+    <h1>Happy Chocolate Day, Bubu! 🍫</h1>
+    <h2>You are sweeter than every chocolate in the world 🤎</h2>
+
+    <p class="message">
+        If I could send you a box full of hugs and kisses,
+        it would taste sweeter than chocolate. 💖
+    </p>
+
+    <img src="/image/chocolate_img.svg" class="choco-img" alt="Chocolate Box">
+
+    <div class="button-section">
+        <button id="nextDayBtn">Next Day → Teddy Day 🧸</button>
+        <button id="playMusicBtn">🎵 Play Music</button>
+        <audio id="bgMusic" src="lovesong.mpeg" loop></audio>
+    </div>
+
+</div>
+
+<div id="floating-elements"></div>
+
+<script>
+
+// Floating chocolates
+const container = document.getElementById('floating-elements');
+const icons = ['🍫','🤎','💖','✨'];
+
+function createFloatingElement() {
+  const span = document.createElement('span');
+  span.innerText = icons[Math.floor(Math.random() * icons.length)];
+  span.style.left = Math.random() * window.innerWidth + 'px';
+  span.style.fontSize = (14 + Math.random() * 14) + 'px';
+  span.style.animationDuration = (4 + Math.random() * 4) + 's';
+  container.appendChild(span);
+
+  setTimeout(() => span.remove(), 7000);
+}
+setInterval(createFloatingElement, 300);
+
+// Music
+const music = document.getElementById('bgMusic');
+document.getElementById('playMusicBtn').addEventListener('click', () => {
+  music.play();
+  document.getElementById('playMusicBtn').style.display = 'none';
+});
+
+// Next page
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+  window.location.href = 'teddyDay.html';
+});
+
+</script>
+
+</body>
+</html>

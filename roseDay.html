@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Day 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <section class="header-section">
+    <h1>Happy Rose Day, Bubu! 🌹</h1>
+    <h4>Even though I can’t hand you this rose, <br>imagine it’s coming with the tightest hug.<br>Sending you an animated bouquet ❤️</h4>
+  </section>
+
+  <!-- Center Animated Bouquet -->
+  <img src="/image/rose1.svg" alt="Animated Bouquet" class="bouquet">
+
+  <!-- Buttons -->
+  <section class="button-section">
+    <button id="nextDayBtn">Next Day → Chocolate Day</button>
+    <br><br>
+    <button id="playMusicBtn">🎵 Play Music</button>
+    <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+  </section>
+</div>
+
+<!-- Four Corner Images -->
+<img src="/image/rose2.svg" class="corner top-left" alt="Top Left">
+<img src="/image/rose3.svg" class="corner top-right" alt="Top Right">
+<img src="/image/rose3.svg" class="corner bottom-left" alt="Bottom Left">
+<img src="/image/rose4.svg" class="corner bottom-right" alt="Bottom Right">
+
+<!-- Floating Roses -->
+<div id="floating-elements"></div>
+
+<script>
+// Floating roses animation
+const container = document.getElementById('floating-elements');
+const icons = ['🌹'];
+
+function createFloatingElement() {
+  const span = document.createElement('span');
+  span.innerText = icons[Math.floor(Math.random() * icons.length)];
+  span.style.left = Math.random() * window.innerWidth + 'px';
+  span.style.fontSize = (12 + Math.random() * 12) + 'px';
+  span.style.animationDuration = (5 + Math.random() * 5) + 's';
+  span.style.zIndex = '5';
+  span.style.pointerEvents = 'none';
+  container.appendChild(span);
+  setTimeout(() => container.removeChild(span), 10000);
+}
+setInterval(createFloatingElement, 200);
+
+// Play music button
+const music = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playMusicBtn');
+playBtn.addEventListener('click', () => {
+  music.play().catch(() => console.log("Autoplay blocked"));
+  playBtn.style.display = 'none';
+});
+
+// Next day button
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+  window.location.href = 'proposeDay.html';
+});
+</script>
+
+</body>
+</html>

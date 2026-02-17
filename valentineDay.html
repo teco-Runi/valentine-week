@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine’s Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffd3e0);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Soft glow */
+body::before {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #ffffff55, transparent 70%);
+    border-radius: 50%;
+    animation: glowMove 12s infinite alternate ease-in-out;
+    z-index: 0;
+}
+
+@keyframes glowMove {
+    from { transform: translate(-200px,-200px); }
+    to { transform: translate(200px,200px); }
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    margin: auto;
+    padding: 60px 20px 120px;
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+}
+
+/* ================= TITLE ================= */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 55px;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+/* ================= IMAGE ================= */
+.valentine-img {
+    width: 260px;
+    margin-bottom: 30px;
+    animation: heartbeat 2.5s infinite;
+    filter: drop-shadow(0 15px 40px rgba(0,0,0,0.3));
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* ================= LOVE LETTER STYLE ================= */
+.message {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 20px;
+    color: white;
+    font-size: 17px;
+    line-height: 1.9;
+    text-align: left;
+    white-space: pre-line;
+}
+
+/* ================= BUTTON ================= */
+button {
+    margin-top: 35px;
+    padding: 14px 35px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: white;
+    color: #ff4f81;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px white;
+}
+
+/* ================= POPUP ================= */
+.popup {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #ff4f81;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.popup.show {
+    opacity: 1;
+}
+
+/* ================= FLOATING HEARTS ================= */
+#floating span {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* ================= FADE ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Happy Valentine’s Day ❤️</h1>
+
+    <img src="/image/Valentine1.svg" class="valentine-img" alt="Valentine Image">
+
+    <p class="message">
+My Love,
+
+I know Valentine’s Day has already passed… and I know because of my overthinking, you might have felt like you’re not good enough.
+
+And that hurts me the most.
+
+So this is my late Valentine message — not because the day matters, but because you matter.
+
+You are one of the most caring, loving, and supportive people I’ve ever known.
+
+You are good.
+You are enough.
+And you are mine — not because I hold you, but because you choose me.
+
+Let’s promise each other something — no overthinking alone. No silent doubts. We talk. We reassure. We trust.
+
+Even if Valentine’s Day is over, my love for you isn’t limited to one date.
+
+You are my everyday Valentine. ❤️
+
+I’m sorry… and I love you more than my fears.
+I choose you. Always. 💍
+    </p>
+
+    <button id="foreverBtn">Forever With You 💖</button>
+
+    <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+
+</div>
+
+<div id="floating"></div>
+<div class="popup" id="popup">You are my always & forever ❤️✨</div>
+
+<script>
+
+/* Floating hearts */
+const floating = document.getElementById('floating');
+const hearts = ['❤️','💖','💕','💘','✨'];
+
+function createHeart() {
+    const span = document.createElement('span');
+    span.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.fontSize = (18 + Math.random() * 15) + 'px';
+    span.style.animationDuration = (5 + Math.random() * 4) + 's';
+    floating.appendChild(span);
+    setTimeout(() => span.remove(), 9000);
+}
+setInterval(createHeart, 500);
+
+/* Button */
+const popup = document.getElementById('popup');
+document.getElementById('foreverBtn').addEventListener('click', () => {
+    popup.classList.add("show");
+});
+
+/* Music first interaction */
+document.body.addEventListener("click", function() {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
+</script>
+
+</body>
+</html>

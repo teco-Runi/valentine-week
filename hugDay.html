@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hug Day 🤗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #ffe9d6, #fff0f5);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: opacity 1s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+    z-index: 5;
+}
+
+/* ================= HUG IMAGE ================= */
+.hug-img {
+    width: 220px;
+    animation: hugMove 4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 25px rgba(255,105,180,0.4));
+}
+
+@keyframes hugMove {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+/* ================= TEXT ================= */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    color: #ff4f81;
+    margin-bottom: 10px;
+}
+
+.message {
+    font-size: 16px;
+    max-width: 320px;
+    margin: 15px auto;
+    color: #a83279;
+    line-height: 1.6;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    margin: 8px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff4f81, #ff8fab);
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* ================= POPUP ================= */
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4f81;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.popup.show {
+    opacity: 1;
+}
+
+/* ================= FLOATING HEARTS ================= */
+#floating span {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* ================= FADE ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Happy Hug Day, Bubu 🤗💞</h1>
+
+    <img src="/image/hug1.svg" class="hug-img" alt="Hug Image">
+
+    <p class="message">
+        If I were there,<br>
+        I would hug you tight,<br>
+        and never let go 💖<br>
+        This hug is full of warmth,<br>
+        comfort, and forever love 🤍
+    </p>
+
+    <div class="buttons">
+        <button id="nextDayBtn">Kiss Day 💋</button>
+        <button id="playMusicBtn">🎵 Play</button>
+        <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+    </div>
+
+</div>
+
+<div id="floating"></div>
+<div class="popup" id="popup">Virtual Hug Sent 🤗💞</div>
+
+<script>
+
+/* Floating hearts */
+const floating = document.getElementById('floating');
+const items = ['💖','💕','🤗','✨'];
+
+function createItem() {
+    const span = document.createElement('span');
+    span.innerText = items[Math.floor(Math.random() * items.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.fontSize = (15 + Math.random() * 15) + 'px';
+    span.style.animationDuration = (5 + Math.random() * 4) + 's';
+    floating.appendChild(span);
+    setTimeout(() => span.remove(), 9000);
+}
+setInterval(createItem, 500);
+
+/* Music Toggle */
+const music = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playMusicBtn');
+
+playBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        playBtn.innerText = "⏸ Pause";
+    } else {
+        music.pause();
+        playBtn.innerText = "🎵 Play";
+    }
+});
+
+/* Smooth Transition */
+const popup = document.getElementById('popup');
+
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        document.body.classList.add("fade-out");
+    }, 800);
+
+    setTimeout(() => {
+        window.location.href = 'kissDay.html';
+    }, 1500);
+
+});
+
+</script>
+
+</body>
+</html>

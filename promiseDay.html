@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hug Day 🤗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #ffe9d6, #fff0f5);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.container {
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+}
+
+/* ================= HUG IMAGE ================= */
+.hug-img {
+    width: 230px;
+    animation: hugPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 15px 35px rgba(255,105,180,0.4));
+}
+
+@keyframes hugPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+/* ================= TEXT ================= */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 44px;
+    color: #ff4f81;
+    margin-bottom: 15px;
+}
+
+.message {
+    font-size: 16px;
+    width: 320px;
+    margin: auto;
+    color: #a83279;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+    margin-top: 25px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    margin: 8px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff4f81, #ff8fab);
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* ================= FLOATING HEARTS ================= */
+#floating span {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* ================= FADE ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Happy Hug Day, Bubu 🤗💞</h1>
+
+    <img src="image/hug1.svg" class="hug-img" alt="Hug Image">
+
+    <p class="message">
+        If I were there,<br>
+        I would hug you tight,<br>
+        and never let go 💖<br>
+        This hug is full of warmth,<br>
+        comfort, and forever love 🤍
+    </p>
+
+    <div class="buttons">
+        <button id="nextDayBtn">Kiss Day 💋</button>
+        <button id="playMusicBtn">🎵 Play</button>
+        <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+    </div>
+
+</div>
+
+<div id="floating"></div>
+
+<script>
+
+/* Floating hearts upward */
+const floating = document.getElementById('floating');
+const items = ['💖','💕','🤗','✨'];
+
+function createItem() {
+    const span = document.createElement('span');
+    span.innerText = items[Math.floor(Math.random() * items.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.fontSize = (15 + Math.random() * 15) + 'px';
+    span.style.animationDuration = (5 + Math.random() * 4) + 's';
+    floating.appendChild(span);
+    setTimeout(() => span.remove(), 9000);
+}
+setInterval(createItem, 500);
+
+/* Music */
+const music = document.getElementById('bgMusic');
+document.getElementById('playMusicBtn').addEventListener('click', () => {
+    music.play();
+});
+
+/* Next Page */
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+    window.location.href = 'kissDay.html';
+});
+
+</script>
+
+</body>
+</html>

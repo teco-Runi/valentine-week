@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiss Day 💋</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+
+    /* Gradient + Your SVG Background */
+    background:
+        linear-gradient(135deg, #ffccd5, #ffe6eb, #ffd6f5),
+        url("kiss4.svg");
+
+    background-repeat: no-repeat;
+    background-size: cover, 70%;
+    background-position: center, center;
+    background-blend-mode: overlay;
+
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.container {
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+    z-index: 5;
+}
+
+/* ================= IMAGE ROW ================= */
+.image-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px; /* safe distance */
+    margin: 20px 0;
+}
+
+/* Main kiss image */
+.kiss-img {
+    width: 230px;
+    animation: pulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 15px 35px rgba(255,0,100,0.4));
+}
+
+/* Side images */
+.side-img {
+    width: 130px;
+    opacity: 0.9;
+    transition: 0.3s ease;
+}
+
+.side-img:hover {
+    transform: scale(1.08);
+}
+
+/* Heartbeat pulse */
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* ================= TEXT ================= */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 46px;
+    color: #ff2e63;
+    margin-bottom: 10px;
+}
+
+.message {
+    font-size: 16px;
+    width: 320px;
+    margin: auto;
+    color: #b30059;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+    margin-top: 25px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    margin: 8px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff2e63, #ff6f91);
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* ================= FLOATING KISSES ================= */
+#floating span {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* ================= FADE ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Happy Kiss Day, Bubu 💋❤️</h1>
+
+    <!-- IMAGE ROW -->
+    <div class="image-row">
+        <img src="image/kiss2.svg" class="side-img" alt="Left Image">
+        <img src="image/kiss1.svg" class="kiss-img" alt="Kiss Image">
+        <img src="image/kiss3.svg" class="side-img" alt="Right Image">
+    </div>
+
+    <p class="message">
+        A kiss for your smile,<br>
+        a kiss for your heart,<br>
+        a kiss that says<br>
+        I'll love you forever 💞
+    </p>
+
+    <div class="buttons">
+        <button id="nextDayBtn">Valentine's Day ❤️</button>
+        <button id="playMusicBtn">🎵 Play</button>
+        <audio id="bgMusic" src="/song/lovesong.mpeg" loop></audio>
+    </div>
+
+</div>
+
+<div id="floating"></div>
+
+<script>
+
+/* Floating kisses */
+const floating = document.getElementById('floating');
+const items = ['💋'];
+
+function createItem() {
+    const span = document.createElement('span');
+    span.innerText = items[Math.floor(Math.random() * items.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.fontSize = (10 + Math.random() * 8) + 'px';
+    span.style.animationDuration = (5 + Math.random() * 4) + 's';
+    floating.appendChild(span);
+    setTimeout(() => span.remove(), 9000);
+}
+setInterval(createItem, 400);
+
+/* Music */
+const music = document.getElementById('bgMusic');
+document.getElementById('playMusicBtn').addEventListener('click', () => {
+    music.play();
+});
+
+/* Next Page */
+document.getElementById('nextDayBtn').addEventListener('click', () => {
+    window.location.href = 'valentineDay.html';
+});
+
+</script>
+
+</body>
+</html>

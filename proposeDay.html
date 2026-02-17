@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreamy Proposal 🌸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= BODY ================= */
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins',sans-serif;
+    background: linear-gradient(135deg,#ffd6e8,#ffe9f3,#fff5f9);
+    position:relative;
+}
+
+/* Soft glow background */
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background: radial-gradient(circle,#ff9acb55,transparent 70%);
+    border-radius:50%;
+    animation: glowMove 8s infinite alternate ease-in-out;
+    z-index:0;
+}
+
+@keyframes glowMove{
+    from{ transform:translate(-150px,-150px);}
+    to{ transform:translate(150px,150px);}
+}
+
+/* ================= CONTAINER ================= */
+.container{
+    text-align:center;
+    position:relative;
+    z-index:5;
+    animation: fadeIn 2s ease forwards;
+}
+
+/* ================= TITLE ================= */
+h1{
+    font-family:'Dancing Script',cursive;
+    font-size:50px;
+    color:#ff4f9a;
+    margin-bottom:15px;
+}
+
+/* ================= RING ================= */
+.ring img{
+    width:130px;
+    animation: glowRing 2s infinite alternate;
+    transition:1s;
+}
+
+@keyframes glowRing{
+    from{ filter: drop-shadow(0 0 10px #ff99cc);}
+    to{ filter: drop-shadow(0 0 40px #ff4f9a);}
+}
+
+.rotateRing{
+    animation: spin 2s linear forwards;
+}
+
+@keyframes spin{
+    from{ transform:rotate(0deg);}
+    to{ transform:rotate(720deg);}
+}
+
+/* ================= MESSAGE ================= */
+.message{
+    font-size:18px;
+    color:#b3005f;
+    margin-top:15px;
+    line-height:1.6;
+}
+
+/* ================= BUTTONS ================= */
+.buttons{
+    margin-top:25px;
+    position:relative;
+}
+
+button{
+    padding:12px 25px;
+    border-radius:30px;
+    border:none;
+    margin:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.yes{
+    background:linear-gradient(45deg,#ff6fa5,#ff99cc);
+    color:white;
+    box-shadow:0 0 15px #ff99cc;
+}
+
+.yes:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 30px #ff4f9a;
+}
+
+.no{
+    background:linear-gradient(45deg,#ff6fa5,#ff99cc);
+    color:#b3005f;
+    position:absolute;
+}
+
+/* ================= PETALS ================= */
+.petal{
+    position:fixed;
+    top:-20px;
+    font-size:22px;
+    animation: fall linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    0%{ transform:translateY(0) rotate(0deg); opacity:1;}
+    100%{ transform:translateY(110vh) rotate(360deg); opacity:0;}
+}
+
+/* ================= FADE ================= */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Will You Be My Forever? 🌸💍</h1>
+
+    <div class="ring">
+        <img id="ringImg" src="/image/propose1'.svg" alt="Ring">
+    </div>
+
+    <p class="message">
+        In this soft pink sky of dreams,<br>
+        I found my forever in you 💕<br>
+        Will you hold my hand for life?
+    </p>
+
+    <div class="buttons">
+        <button class="yes" id="yesBtn">Yes 💖</button>
+        <button class="no" id="noBtn">No</button>
+    </div>
+
+</div>
+
+<script>
+
+/* YES Click → Spin + Go Next Page */
+document.getElementById("yesBtn").addEventListener("click",function(){
+
+    document.getElementById("ringImg").classList.add("rotateRing");
+
+    setTimeout(()=>{
+        window.location.href="chocolateDay.html";   // change to your next page
+    },2000);
+});
+
+
+/* NO Button → Move when trying to click */
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseenter",moveButton);
+noBtn.addEventListener("click",moveButton);
+
+function moveButton(){
+    const maxX=window.innerWidth-100;
+    const maxY=window.innerHeight-50;
+
+    const randomX=Math.random()*maxX;
+    const randomY=Math.random()*maxY;
+
+    noBtn.style.position="fixed";
+    noBtn.style.left=randomX+"px";
+    noBtn.style.top=randomY+"px";
+}
+
+
+/* Floating petals */
+function createPetal(){
+    const p=document.createElement("div");
+    p.classList.add("petal");
+    p.innerText="🌸";
+    p.style.left=Math.random()*window.innerWidth+"px";
+    p.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),10000);
+}
+setInterval(createPetal,500);
+
+</script>
+
+</body>
+</html>
